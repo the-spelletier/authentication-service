@@ -9,21 +9,22 @@ function get (req, res) {
             }
             else {
                 delete result.password;
-                res.status(200).send({user : result});
+                delete result.token;
+                res.status(200).send(result);
             }
         });
 }
 
 function create (req, res) {
     userService
-        .createUser(req.query)
+        .createUser(req.body)
         .then(result => {
             if (!result) {
                 res.status(404).send({ message: "User not found" });
             }
             else {
                 delete result.password;
-                res.status(200).send({user : result});
+                res.status(200).send(result);
             }
         }).catch(err => {
             res.status(401).send({ message: "Unable to update the user" });
@@ -32,7 +33,7 @@ function create (req, res) {
 
 function update (req, res) {
     userService
-        .updateUser(req.query)
+        .updateUser(req.body)
         .then(result => {
             if (!result) {
                 res.status(404).send({ message: "User not found" });

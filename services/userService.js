@@ -22,7 +22,7 @@ const deleteUser = user => {
         .then(result => {
             if (result) {
                 result.deleted = true;
-                result.save();
+                return updateUser(result)
             }
             return result;
         });
