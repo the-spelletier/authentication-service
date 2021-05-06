@@ -1,8 +1,8 @@
-const { User } = require('../models');
 const userService = require('../services/userService');
+const authService = require('../services/authService');
 
 function signin (req, res) {
-    userService
+    authService
         .authenticate(req.body)
         .then(result => {
             if (!result) {
